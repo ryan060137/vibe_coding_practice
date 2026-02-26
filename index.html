@@ -1,18 +1,296 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
+  <title>타임박싱 플래너 - 집중을 설계하는 하루</title>
+  <meta name="description" content="타임박싱 기법으로 하루를 설계하고 집중을 유지하는 무료 플래너. 시간 블록, 우선순위, 에너지 레벨, 회고까지 한 번에." />
   <meta name="google-adsense-account" content="ca-pub-3344151703829966">
   <script async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3344151703829966"
     crossorigin="anonymous"></script>
-  <link href='/style.css' rel='stylesheet'>
+  <link href="/style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-mark">TB</span>
+      <div class="brand-text">
+        <strong>Timeboxing Planner</strong>
+        <small>집중을 설계하는 하루</small>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="#planner">플래너</a>
+      <a href="#guide">가이드</a>
+      <a href="#templates">템플릿</a>
+      <a href="#faq">FAQ</a>
+      <a href="/about.html">소개</a>
+      <a href="/privacy.html">개인정보</a>
+      <a href="/terms.html">이용약관</a>
+    </nav>
+    <a class="cta" href="#planner">오늘 계획하기</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">집중과 실행의 균형</p>
+        <h1>할 일을 시간으로 바꾸는<br>타임박싱 플래너</h1>
+        <p class="lead">
+          일정표에 “해야 할 일”을 쓰는 대신, “언제 할지”를 먼저 정합니다.
+          시간 블록, 에너지 레벨, 우선순위를 함께 설계해 하루의 성공 확률을 높이세요.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#planner">플래너 바로가기</a>
+          <a class="btn ghost" href="#guide">타임박싱 가이드 읽기</a>
+        </div>
+        <div class="hero-metrics">
+          <div>
+            <strong>3단계</strong>
+            <span>설계 → 실행 → 회고</span>
+          </div>
+          <div>
+            <strong>1일 15분</strong>
+            <span>계획 시간은 짧게</span>
+          </div>
+          <div>
+            <strong>100% 로컬</strong>
+            <span>데이터는 브라우저에 저장</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <span>오늘의 타임박스</span>
+          <span class="pill">예시</span>
+        </div>
+        <ul class="hero-list">
+          <li>
+            <span class="time">09:30 - 10:30</span>
+            <span class="task">핵심 작업 A (딥워크)</span>
+            <span class="tag high">High</span>
+          </li>
+          <li>
+            <span class="time">11:00 - 11:30</span>
+            <span class="task">메일, 슬랙 처리</span>
+            <span class="tag mid">Mid</span>
+          </li>
+          <li>
+            <span class="time">14:00 - 15:00</span>
+            <span class="task">디자인 리뷰</span>
+            <span class="tag low">Low</span>
+          </li>
+          <li>
+            <span class="time">16:00 - 16:20</span>
+            <span class="task">회고 및 내일 준비</span>
+            <span class="tag mid">Mid</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="planner" class="planner">
+      <div class="section-header">
+        <h2>타임박싱 플래너</h2>
+        <p>시간을 먼저 정하면, 할 일이 따라옵니다. 오늘 하루를 블록으로 나눠보세요.</p>
+      </div>
+
+      <div class="planner-grid">
+        <div class="planner-form">
+          <h3>블록 추가</h3>
+          <form id="block-form">
+            <label>
+              날짜
+              <input type="date" id="plan-date" required>
+            </label>
+            <div class="row">
+              <label>
+                시작
+                <input type="time" id="start-time" required>
+              </label>
+              <label>
+                종료
+                <input type="time" id="end-time" required>
+              </label>
+            </div>
+            <label>
+              작업 제목
+              <input type="text" id="task-title" placeholder="예: 핵심 작업 A" required>
+            </label>
+            <label>
+              작업 설명
+              <textarea id="task-notes" rows="3" placeholder="오늘 이 시간에 끝내야 할 핵심을 적어두세요."></textarea>
+            </label>
+            <div class="row">
+              <label>
+                우선순위
+                <select id="priority">
+                  <option value="high">High</option>
+                  <option value="mid">Mid</option>
+                  <option value="low">Low</option>
+                </select>
+              </label>
+              <label>
+                에너지 레벨
+                <select id="energy">
+                  <option value="high">높음</option>
+                  <option value="mid">보통</option>
+                  <option value="low">낮음</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              목표 결과
+              <input type="text" id="deliverable" placeholder="예: 초안 완료 / 문서 2페이지" />
+            </label>
+            <button class="btn primary" type="submit">블록 추가</button>
+            <p class="hint">팁: 50~90분 집중 블록 + 10~15분 회복 시간을 권장합니다.</p>
+          </form>
+        </div>
+
+        <div class="planner-board">
+          <div class="board-header">
+            <h3>오늘의 블록</h3>
+            <div class="board-actions">
+              <button class="btn ghost" id="export-csv">CSV 내보내기</button>
+              <button class="btn ghost" id="clear-day">오늘 초기화</button>
+            </div>
+          </div>
+          <div id="blocks" class="blocks"></div>
+
+          <div class="reflection">
+            <h4>하루 회고</h4>
+            <textarea id="daily-review" rows="4" placeholder="오늘의 성과와 다음 개선점을 기록하세요."></textarea>
+            <button class="btn ghost" id="save-review">회고 저장</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="focus-timer">
+        <div>
+          <h3>포커스 타이머</h3>
+          <p>현재 블록에 집중하기 위한 간단한 타이머입니다.</p>
+        </div>
+        <div class="timer-controls">
+          <input type="number" id="timer-minutes" min="5" max="180" value="50">
+          <button class="btn primary" id="start-timer">시작</button>
+          <button class="btn ghost" id="pause-timer">일시정지</button>
+          <button class="btn ghost" id="reset-timer">초기화</button>
+        </div>
+        <div class="timer-display" id="timer-display">50:00</div>
+      </div>
+    </section>
+
+    <section id="guide" class="guide">
+      <div class="section-header">
+        <h2>타임박싱 가이드</h2>
+        <p>고품질 콘텐츠와 명확한 구조는 사용자가 다시 찾게 만드는 핵심입니다.</p>
+      </div>
+      <div class="guide-grid">
+        <article>
+          <h3>1. 큰 목표를 작은 블록으로</h3>
+          <p>목표를 3~5개의 핵심 작업으로 쪼개고, 각 작업을 캘린더 블록에 배치하세요.</p>
+        </article>
+        <article>
+          <h3>2. 에너지 곡선에 맞추기</h3>
+          <p>오전 고에너지 시간엔 창의 작업, 오후엔 반복 업무를 배치합니다.</p>
+        </article>
+        <article>
+          <h3>3. 회복 시간을 먼저 예약</h3>
+          <p>집중 블록 사이에 짧은 휴식과 워크스루 시간을 확보하세요.</p>
+        </article>
+        <article>
+          <h3>4. 가시적인 결과 정의</h3>
+          <p>각 블록마다 “끝났음을 보여줄 결과물”을 한 줄로 기록합니다.</p>
+        </article>
+      </div>
+      <div class="guide-callout">
+        <h4>하루 운영 체크리스트</h4>
+        <ul>
+          <li>가장 중요한 일 1개는 오전 첫 블록에 배치했나요?</li>
+          <li>일정에 여유 버퍼(20~30분)가 있나요?</li>
+          <li>회의/알림 시간은 블록으로 묶어 처리하나요?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="templates" class="templates">
+      <div class="section-header">
+        <h2>추천 템플릿</h2>
+        <p>업무 스타일에 맞는 시간 배치를 참고하세요.</p>
+      </div>
+      <div class="template-grid">
+        <div class="template-card">
+          <h3>딥워크 데이</h3>
+          <p>오전 2개 집중 블록, 오후 회의 최소화.</p>
+          <ul>
+            <li>09:00-10:30 핵심 작업</li>
+            <li>10:45-12:15 핵심 작업</li>
+            <li>14:00-15:00 회의</li>
+            <li>16:00-16:30 회고</li>
+          </ul>
+        </div>
+        <div class="template-card">
+          <h3>협업 데이</h3>
+          <p>회의와 피드백을 묶고, 집중 블록을 확보.</p>
+          <ul>
+            <li>10:00-11:00 팀 미팅</li>
+            <li>11:30-12:30 리뷰 반영</li>
+            <li>15:00-16:00 공유 세션</li>
+            <li>16:30-17:00 정리</li>
+          </ul>
+        </div>
+        <div class="template-card">
+          <h3>개인 성장 데이</h3>
+          <p>학습과 실행을 균형 있게.</p>
+          <ul>
+            <li>09:30-10:30 학습</li>
+            <li>10:45-11:30 실습</li>
+            <li>14:00-15:00 프로젝트 적용</li>
+            <li>16:30-17:00 회고</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="section-header">
+        <h2>자주 묻는 질문</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>타임박싱과 투두리스트의 차이는 무엇인가요?</summary>
+          <p>투두리스트는 할 일을 나열하고, 타임박싱은 할 일을 수행할 시간을 먼저 예약합니다.</p>
+        </details>
+        <details>
+          <summary>계획을 자주 바꿔도 괜찮나요?</summary>
+          <p>네. 중요한 것은 “시간을 보호하는 습관”입니다. 필요하면 블록을 이동하세요.</p>
+        </details>
+        <details>
+          <summary>데이터는 어디에 저장되나요?</summary>
+          <p>모든 데이터는 브라우저 로컬 저장소에 보관됩니다.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>Timeboxing Planner</strong>
+      <p>지속 가능한 집중을 만드는 무료 플래너.</p>
+    </div>
+    <div class="footer-links">
+      <a href="/about.html">소개</a>
+      <a href="/privacy.html">개인정보 처리방침</a>
+      <a href="/terms.html">이용약관</a>
+      <a href="mailto:hello@timeboxing.local">문의</a>
+    </div>
+  </footer>
+
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
